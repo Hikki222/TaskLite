@@ -1,0 +1,18 @@
+* { box-sizing: border-box; }
+html, body {
+  margin: 0;
+  font-family: "Inter", sans-serif;
+  height: 100%;
+}
+.container {
+  padding: 30px calc(50% - 976px / 2 ) 30px;
+}
+
+:root{
+    --color-primary: #f0f0f0;
+    --color-back: rgb(229, 224, 246);
+    --color-border: #9494f781;
+    --color-text: rgb(127, 105, 193);
+    --color-button: rgb(127, 102, 204);
+    --color-error: rgb(190, 1, 1);
+}

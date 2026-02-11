@@ -4,14 +4,57 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <link rel="stylesheet" href="styles/index.css" />
+    <link rel="stylesheet" href="styles/style.css" />
+    <link rel="stylesheet" href="styles/tasks.css" />
   </head>
   <body>
     <header>
-        <h1>To Do</h1>
+      <div class="navigation">
+        <div class="logo">TaskLite</div>
+        <div class="tabs">
+          <div class="tab__active">
+            <a href="">To Do</a>
+          </div>
+          <div class="tab">
+            <a href="">Kanban</a>
+          </div>
+          <div class="tab">
+            <a href="">Привычки</a>
+          </div>
+        </div>
+      </div>
     </header>
 
-    <main></main>
-    
+    <main>
+      <div class="container">
+        <h1>Задачи</h1>
+
+        <form class="addTask">
+          <input type="text" id="addInp" placeholder="Введите задачу" />
+          <button type="submit" id="addBut">Добавить</button>
+        </form>
+
+        <div class="controls">
+          <div class="sTask">
+            <input type="text" id="searchTask" placeholder="Поиск задач..." />
+            <button class="filterButton">Все</button>
+            <button class="filterButton">Активные</button>
+            <button class="filterButton">Завершенные</button>
+
+            <select class="sort-select">
+              <option value="newest">Сначала новые</option>
+              <option value="oldest">Сначала старые</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <section class="tasks">
+
+      </section>
+    </main>
+
     <footer></footer>
+    <script src="kk.js"></script>
   </body>
 </html>
