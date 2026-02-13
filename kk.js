@@ -1,45 +1,53 @@
 const inputAdd = document.getElementById("addInp");
-const butAdd = document.getElementById("addBut");
 const searchInp = document.getElementById("searchTask");
 const tasksElem = document.querySelector(".tasks");
-const addTasks = document.getElementById("addInp");
-const searchTasks = document.getElementById("searchTask");
 const taskForm = document.querySelector(".addTask");
-const time = new Date();
-// const tasks = [
-//   { title: "Спорт", text: "Сходить в зал", done: false, date: "10.10" },
-//   { title: "Магазин", text: "Купить молоко", done: true, date: "11.10" },
-//   { title: "Учеба", text: "Выучить JS", done: false, date: "12.10" },
-// ];
+const sortSelector = document.querySelector(".sort-select");
+
 let tasks = [];
-console.log(tasks);
+let sortMode = "newest";
+let nextId = 1; // счётчик, который никогда не уменьшается
+
+let currentFilter = "all";
+
 taskForm.addEventListener("submit", (event) => {
   event.preventDefault();
   addTask();
 });
+
+sortSelector.addEventListener("change", (event) => {
+  sortMode = event.target.value;
+  renderTasks();
+});
+
 function addTask() {
-  let inputTask = document.getElementById("addInp").value;
+  const inputTask = inputAdd.value.trim();
 
   if (inputTask === "") {
     inputAdd.classList.add("error");
     return;
-  } else {
-    inputAdd.classList.remove("error");
   }
-  let newTask = {
-    id: tasks.length + 1,
+
+  inputAdd.classList.remove("error");
+
+  const now = new Date(); // свежая дата для каждой задачи
+
+  tasks.push({
+    id: nextId++,
     title: inputTask,
-    complete: false,
-    date: `${time.getDate()}.${time.getMonth() + 1}.${time.getFullYear()}`,
-  };
-  tasks.push(newTask);
+    done: false,
+    date: `${now.getDate()}.${now.getMonth() + 1}.${now.getFullYear()}`,
+  });
+
   inputAdd.value = "";
   renderTasks();
 }
 
-function createTaskCard(task, index) {
+
+function createTaskCard(task) {
   const card = document.createElement("article");
   card.classList.add("card");
+
   if (task.done) {
     card.classList.add("task-done");
   }
@@ -53,14 +61,15 @@ function createTaskCard(task, index) {
 
   const taskName = document.createElement("div");
   taskName.classList.add("task-name");
-  taskName.innerHTML = `<h3 class="card-title">${task.title}`;
+  taskName.innerHTML = `<h3 class="card-title">${task.title}</h3>`; // закрыт тег h3
 
   card.append(taskName);
-  card.append(createTaskActions(task, index));
-  tasksElem.append(card);
+  card.append(createTaskActions(task));
+
+  return card; // теперь возвращает элемент
 }
 
-function createTaskActions(task, index) {
+function createTaskActions(task) {
   const taskActions = document.createElement("div");
   taskActions.classList.add("task-actions");
 
@@ -69,14 +78,14 @@ function createTaskActions(task, index) {
     `<svg class="task__icon" viewBox="0 0 24 24" fill="none" stroke="#6f64a3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14">
       <path d="M12 20h9"></path>
       <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
-    </svg>`,
+    </svg>`
   );
 
   btnEdit.addEventListener("click", (event) => {
     event.stopPropagation();
     const newText = prompt("Введите новый текст:", task.title);
-    if (newText) {
-      task.title = newText;
+    if (newText !== null && newText.trim() !== "") {
+      task.title = newText.trim();
       renderTasks();
     }
   });
@@ -89,12 +98,12 @@ function createTaskActions(task, index) {
       <path d="M10 11v6"></path>
       <path d="M14 11v6"></path>
       <path d="M9 6V4a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2"></path>
-    </svg>`,
+    </svg>`
   );
 
   btnDelete.addEventListener("click", (event) => {
     event.stopPropagation();
-    tasks.splice(index, 1);
+    tasks = tasks.filter((t) => t.id !== task.id); // по id надежнее
     renderTasks();
   });
 
@@ -109,29 +118,22 @@ function createButton(className, innerHTML) {
   return button;
 }
 
-function renderTasks() {
+function renderTasks() {  //renderAll//
+  const sorted = [...tasks].sort((a, b) => {
+    return sortMode === "newest" ? b.id - a.id : a.id - b.id;
+  });
+
+console.log(tasks)
+
   tasksElem.innerHTML = "";
-  tasks.forEach((task) => createTaskCard(task));
+  sorted.forEach((task) => tasksElem.append(createTaskCard(task)));
+  console.log(currentFilter)
+  const selectorFilter = tasks.filter((task, i) => {
+    if (currentFilter === 'active') return task.done
+    return true;
+  })
+  console.log(selectorFilter)
+  return selectorFilter;
 }
 
 renderTasks();
-
-const sortSelector = document.querySelector(".sort-select");
-let sortMode;
-sortSelector.addEventListener("change", (event) => {
-  sortMode = event.target.value;
-  console.log(`${sortMode}`);
-  renderAll();
-});
-
-function renderAll() {
-  const sortedTasks = [...tasks].sort((a, b) => {
-    if (sortMode === "newest") {
-      console.log(a, b);
-      return a.id - b.id;
-    }
-    return b.id - a.id;
-  });
-  tasksElem.innerHTML = "";
-  sortedTasks.forEach((task) => tasksElem.before(createTaskCard(task)));
-}
