@@ -15,4 +15,5 @@ html, body {
     --color-text: rgb(127, 105, 193);
     --color-button: rgb(127, 102, 204);
     --color-error: rgb(190, 1, 1);
+     --color-style: rgba(95, 5, 122, 0.719);
 }

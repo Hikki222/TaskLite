@@ -3,23 +3,52 @@ const searchInp = document.getElementById("searchTask");
 const tasksElem = document.querySelector(".tasks");
 const taskForm = document.querySelector(".addTask");
 const sortSelector = document.querySelector(".sort-select");
+const filterSelector = document.querySelector(".filter-select");
 
-let tasks = [];
+let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
 let sortMode = "newest";
-let nextId = 1; // счётчик, который никогда не уменьшается
+let nextId = tasks.length > 0
+? Math.max(...tasks.map((t) =>t.id)) + 1 
+: 1;
+let currentFilter = "all"; 
 
-let currentFilter = "all";
-
+// Отправка формы
 taskForm.addEventListener("submit", (event) => {
   event.preventDefault();
   addTask();
 });
 
+// Сортировка
 sortSelector.addEventListener("change", (event) => {
   sortMode = event.target.value;
   renderTasks();
 });
 
+// Шаг 4: Поиск в реальном времени
+searchInp.addEventListener("input", () => {
+  renderTasks();
+});
+
+// Шаг 5–7: Вкладки фильтров
+const filterButtons = document.querySelectorAll(".filter-btn");
+filterButtons.forEach((btn) => {
+  btn.addEventListener("click", () => {
+    // Шаг 5: переключение подсветки
+    filterButtons.forEach((b) => b.classList.remove("active"));
+    btn.classList.add("active");
+
+    // Шаг 6: определение фильтра по тексту кнопки
+    const text = btn.textContent.trim().toLowerCase();
+    if (text === "активные") currentFilter = "active";
+    else if (text === "выполненные") currentFilter = "completed";
+    else currentFilter = "all";
+
+    // Шаг 7: перерисовка
+    renderTasks();
+  });
+});
+
+// Добавление задачи
 function addTask() {
   const inputTask = inputAdd.value.trim();
 
@@ -30,19 +59,21 @@ function addTask() {
 
   inputAdd.classList.remove("error");
 
-  const now = new Date(); // свежая дата для каждой задачи
+  const now = new Date();
+  const hours = String(now.getHours()).padStart(2, "0");
+  const minutes = String(now.getMinutes()).padStart(2, "0");
 
   tasks.push({
     id: nextId++,
     title: inputTask,
     done: false,
     date: `${now.getDate()}.${now.getMonth() + 1}.${now.getFullYear()}`,
+    time: `${hours}:${minutes}`
   });
-
+  saveTasks();
   inputAdd.value = "";
   renderTasks();
 }
-
 
 function createTaskCard(task) {
   const card = document.createElement("article");
@@ -55,20 +86,27 @@ function createTaskCard(task) {
   card.addEventListener("click", (event) => {
     if (!event.target.closest(".task-actions")) {
       task.done = !task.done;
+      saveTasks();
       renderTasks();
     }
   });
 
   const taskName = document.createElement("div");
   taskName.classList.add("task-name");
-  taskName.innerHTML = `<h3 class="card-title">${task.title}</h3>`; // закрыт тег h3
+  taskName.innerHTML = `<h3 class="card-title">${task.title}</h3>`;
+
+  const taskDate = document.createElement("span");
+  taskDate.classList.add("task-date");
+  taskDate.textContent = `${task.date} | ${task.time}`;
+  taskName.append(taskDate);
 
   card.append(taskName);
   card.append(createTaskActions(task));
 
-  return card; // теперь возвращает элемент
+  return card;
 }
 
+// Создание кнопок действий
 function createTaskActions(task) {
   const taskActions = document.createElement("div");
   taskActions.classList.add("task-actions");
@@ -86,6 +124,7 @@ function createTaskActions(task) {
     const newText = prompt("Введите новый текст:", task.title);
     if (newText !== null && newText.trim() !== "") {
       task.title = newText.trim();
+      saveTasks();
       renderTasks();
     }
   });
@@ -103,7 +142,8 @@ function createTaskActions(task) {
 
   btnDelete.addEventListener("click", (event) => {
     event.stopPropagation();
-    tasks = tasks.filter((t) => t.id !== task.id); // по id надежнее
+    tasks = tasks.filter((t) => t.id !== task.id);
+    saveTasks();
     renderTasks();
   });
 
@@ -118,22 +158,46 @@ function createButton(className, innerHTML) {
   return button;
 }
 
-function renderTasks() {  //renderAll//
-  const sorted = [...tasks].sort((a, b) => {
+// Единая функция рендера (Шаги 2, 3, 8)
+function renderTasks() {
+  const searchText = searchInp.value.trim().toLowerCase();
+
+  // Шаг 2: фильтрация по статусу
+  let filtered = tasks.filter((task) => {
+    if (currentFilter === "active") return !task.done;
+    if (currentFilter === "completed") return task.done;
+    return true;
+  });
+
+  // Шаг 3 + 8: поиск поверх фильтра статуса
+  if (searchText) {
+    filtered = filtered.filter((t) =>
+      t.title.toLowerCase().includes(searchText)
+    );
+  }
+
+  // Сортировка
+  const sorted = filtered.sort((a, b) => {
     return sortMode === "newest" ? b.id - a.id : a.id - b.id;
   });
 
-console.log(tasks)
-
   tasksElem.innerHTML = "";
   sorted.forEach((task) => tasksElem.append(createTaskCard(task)));
-  console.log(currentFilter)
-  const selectorFilter = tasks.filter((task, i) => {
-    if (currentFilter === 'active') return task.done
-    return true;
-  })
-  console.log(selectorFilter)
-  return selectorFilter;
 }
 
+// Инициализация
 renderTasks();
+
+// Самостоятельная часть: определение части суток
+function getPartOfDay() {
+  const hour = new Date().getHours();
+  if (hour >= 6 && hour < 12) return "Утро";
+  if (hour >= 12 && hour < 18) return "День";
+  if (hour >= 18 && hour < 23) return "Вечер";
+  return "Ночь";
+}
+console.log(getPartOfDay());
+
+function saveTasks(){
+ localStorage.setItem('tasks', JSON.stringify(tasks));
+}
