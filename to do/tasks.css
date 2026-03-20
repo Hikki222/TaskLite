@@ -1,7 +1,4 @@
-.container {
-  padding-top: 146px;
-  padding-bottom: 20px;
-}
+
 
 .addTask,
 .controls {
@@ -102,6 +99,7 @@ button {
 
 /*JS*/
 .task-content {
+
 }
 
 .task-done {

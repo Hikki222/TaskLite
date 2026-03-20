@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <link rel="stylesheet" href="/styles/style.css" />
+  <link rel="stylesheet" href="/Kanban/kanban.css" />
+</head>
+<body>
+  <header>
+    <div class="navigation">
+      <div class="logo">TaskLite</div>
+      <div class="tabs">
+        <div class="tab">
+          <a href="/to do/index.html">To Do</a>
+        </div>
+        <div class="tab__active">
+          <a href="">Kanban</a>
+        </div>
+        <div class="tab">
+          <a href="/habits/habits.html">Привычки</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <h1>Задачи</h1>
+    <section class="group">
+      <div class="column" data-status="To Do">
+        <div class="title">
+          <h2>To Do</h2>
+          <span>0</span>
+        </div>
+        <button class="add-task">+ Добавить задачу</button>
+      </div>
+
+      <div class="column" data-status="In Progress">
+        <div class="title">
+          <h2>In Progress</h2>
+          <span>0</span>
+        </div>
+        <button class="add-task">+ Добавить задачу</button>
+      </div>
+
+      <div class="column" data-status="Done">
+        <div class="title">
+          <h2>Done</h2>
+          <span>0</span>
+        </div>
+        <button class="add-task">+ Добавить задачу</button>
+      </div>
+    </section>
+  </main>
+
+  <footer></footer>
+  <script src="/Kanban/Kanban.js"></script>
+</body>
+</html>

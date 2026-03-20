@@ -1,0 +1,179 @@
+body {
+  min-height: 100vh;
+  background: linear-gradient(#8ac8ff, #70e2ff, #e5f1ff);
+}
+
+.navigation {
+  display: flex;
+  position: fixed;
+  top: 0;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(#c2c2c2, #99d8ff);
+  padding: 30px calc(50% - 976px / 2) 30px;
+  width: 100%;
+}
+
+.group {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.navigation a {
+  text-decoration: none;
+}
+
+.logo {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.tabs {
+  display: flex;
+  gap: 20px;
+}
+
+.tab {
+  padding: 10px 30px;
+  cursor: pointer;
+  margin-left: 10px;
+  border: none;
+  border-radius: 10px;
+}
+
+.tab a {
+  color: var(--color-kanText);
+}
+
+.tab:hover {
+  transition: background-color 0.3s;
+  background-color: var(--color-kanActBg);
+}
+
+.tab__active {
+  padding: 10px 30px;
+  border: 1px solid var(--color-kanActBg);
+  background-color: var(--color-kanAct);
+  border-radius: 10px;
+  cursor: pointer;
+}
+.tab__active a {
+  color: var(--color-kanText);
+}
+
+/*Задачи*/
+.To-Do {
+  background-color: #e0f7fa;
+  border-radius: 10px;
+  padding: 20px;
+  width: 300px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.To-Do h2 {
+  font-size: 24px;
+  margin: 0;
+}
+.group button {
+  background-color: rgb(224, 235, 253);
+  padding: 10px;
+  border: 1px dashed rgb(92, 126, 197);
+  border-radius: 5px;
+  cursor: pointer;
+  width: 100%;
+  color: rgb(92, 126, 197);
+  font-size: 15px;
+  transition: 0.2s;
+}
+.group button:hover {
+  background-color: rgba(174, 189, 214, 0.438);
+}
+.group button:active {
+  background-color: rgba(137, 150, 172, 0.438);
+}
+
+.column {
+  background-color: #e0f7fa;
+  border-radius: 10px;
+  padding: 20px;
+  width: 300px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.column h2 {
+  font-size: 24px;
+  margin: 0;
+}
+.inProgress button {
+  background-color: rgb(224, 235, 253);
+  padding: 10px;
+  border: 1px dashed rgb(92, 126, 197);
+  border-radius: 5px;
+  cursor: pointer;
+  width: 100%;
+  color: rgb(92, 126, 197);
+  font-size: 15px;
+  transition: 0.2s;
+}
+.inProgress button:hover {
+  background-color: rgba(174, 189, 214, 0.438);
+}
+.inProgress button:active {
+  background-color: rgba(137, 150, 172, 0.438);
+}
+
+.done {
+  background-color: #e0f7fa;
+  border-radius: 10px;
+  padding: 20px;
+  width: 300px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.done h2 {
+  font-size: 24px;
+  margin: 0;
+}
+.done button {
+  background-color: rgb(224, 235, 253);
+  padding: 10px;
+  border: 1px dashed rgb(92, 126, 197);
+  border-radius: 5px;
+  cursor: pointer;
+  width: 100%;
+  color: rgb(92, 126, 197);
+  font-size: 15px;
+  transition: 0.2s;
+}
+.done button:hover {
+  background-color: rgba(174, 189, 214, 0.438);
+}
+.done button:active {
+  background-color: rgba(137, 150, 172, 0.438);
+}
+.title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px dashed gray;
+  margin: 5px;
+}
+.task-card {
+  margin-top: 20px;
+  border: 2px solid black;
+  border-radius: 10px;
+  padding: 2px;
+  background-color: var(--color-kanAct);
+}
+
+.task-card:hover{
+  cursor: pointer;
+}
+
+.task-title {
+  border-bottom: 2px dashed gray;
+}
+.task-header {
+  align-items: center;
+}

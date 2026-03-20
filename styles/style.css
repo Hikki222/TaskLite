@@ -1,19 +1,25 @@
-* { box-sizing: border-box; }
-html, body {
+* {
+  box-sizing: border-box;
+}
+html,
+body {
   margin: 0;
   font-family: "Inter", sans-serif;
   height: 100%;
 }
 .container {
-  padding: 30px calc(50% - 976px / 2 ) 30px;
+  padding: 146px calc(50% - 976px / 2) 20px;
 }
 
-:root{
-    --color-primary: #f0f0f0;
-    --color-back: rgb(229, 224, 246);
-    --color-border: #9494f781;
-    --color-text: rgb(127, 105, 193);
-    --color-button: rgb(127, 102, 204);
-    --color-error: rgb(190, 1, 1);
-     --color-style: rgba(95, 5, 122, 0.719);
+:root {
+  --color-primary: #f0f0f0;
+  --color-back: rgb(229, 224, 246);
+  --color-border: #9494f781;
+  --color-text: rgb(127, 105, 193);
+  --color-button: rgb(127, 102, 204);
+  --color-error: rgb(190, 1, 1);
+  --color-style: rgba(95, 5, 122, 0.719);
+  --color-kanAct: rgba(202, 235, 250, 0.747);
+  --color-kanActBg: rgba(196, 235, 252);
+  --color-kanText: rgba(55, 144, 186);
 }

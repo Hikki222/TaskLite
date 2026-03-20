@@ -32,6 +32,10 @@
     border-radius: 10px;
 }
 
+.tab a{
+    color: var(--color-text);
+}
+
 .tab:hover {
     transition: background-color 0.3s;
     background-color: var(--color-back);
@@ -44,4 +48,8 @@
     background-color: var(--color-back);
     border-radius: 10px;
     cursor: pointer;
+}
+
+.tab__active a{
+        color: var(--color-text);
 }
