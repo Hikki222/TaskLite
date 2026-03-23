@@ -29,11 +29,11 @@ searchInp.addEventListener("input", () => {
   renderTasks();
 });
 
-// Шаг 5–7: Вкладки фильтров
+//Вкладки фильтров
 const filterButtons = document.querySelectorAll(".filter-btn");
 filterButtons.forEach((btn) => {
   btn.addEventListener("click", () => {
-    // Шаг 5: переключение подсветки
+    //переключение подсветки
     filterButtons.forEach((b) => b.classList.remove("active"));
     btn.classList.add("active");
 
@@ -43,7 +43,7 @@ filterButtons.forEach((btn) => {
     else if (text === "выполненные") currentFilter = "completed";
     else currentFilter = "all";
 
-    // Шаг 7: перерисовка
+    //перерисовка
     renderTasks();
   });
 });

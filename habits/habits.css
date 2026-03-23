@@ -7,7 +7,7 @@
   background: linear-gradient(
     180deg,
     rgba(255, 208, 143, 1) 97%,
-    rgba(240, 255, 209, 1) 16%,
+    rgba(240, 255, 209, 1) 16%
   );
   padding: 30px calc(50% - 976px / 2) 30px;
   width: 100%;
@@ -31,7 +31,7 @@
 .tabs {
   display: flex;
   gap: 20px;
-  box-shadow: 5px 5px 15px 5px rgba(255,255,255,0);
+  box-shadow: 5px 5px 15px 5px rgba(255, 255, 255, 0);
   padding: 5px;
   border-radius: 5px;
   background-color: rgba(255, 204, 128, 0.637);
@@ -65,5 +65,38 @@
   color: white;
 }
 body {
-background:radial-gradient(circle, rgba(240, 255, 209, 1) 0%, rgba(255, 208, 143, 1) 70%)
+  background: radial-gradient(
+    circle,
+    rgba(240, 255, 209, 1) 0%,
+    rgba(255, 208, 143, 1) 70%
+  );
+}
+
+/*Main*/
+
+.habits {
+  margin-top: 50px;
+}
+
+#addBut {
+  padding: 9px 10px;
+  background-color: rgb(255, 211, 131);
+  border-radius: 10px;
+  border: 1px solid rgb(204, 204, 204);
+  height: 46px;
+  cursor: pointer;
+}
+#addBut:hover {
+  transition: all 0.3s;
+  background-color: rgb(255, 177, 104);
+  -webkit-box-shadow:
+    -10px 0px 13px -7px #000000,
+    10px 0px 13px -7px #000000,
+    0px -3px 10px -3px rgba(0, 0, 0, 0.28);
+  box-shadow:
+    -10px 0px 13px -7px #000000,
+    10px 0px 13px -7px #000000,
+    0px -3px 10px -3px rgba(0, 0, 0, 0.28);
+
+    transform: scale(0.980);
 }
