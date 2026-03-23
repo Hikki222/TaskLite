@@ -1,0 +1,69 @@
+.navigation {
+  display: flex;
+  position: fixed;
+  top: 0;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 208, 143, 1) 97%,
+    rgba(240, 255, 209, 1) 16%,
+  );
+  padding: 30px calc(50% - 976px / 2) 30px;
+  width: 100%;
+}
+
+.group {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.navigation a {
+  text-decoration: none;
+}
+
+.logo {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.tabs {
+  display: flex;
+  gap: 20px;
+  box-shadow: 5px 5px 15px 5px rgba(255,255,255,0);
+  padding: 5px;
+  border-radius: 5px;
+  background-color: rgba(255, 204, 128, 0.637);
+}
+
+.tab {
+  padding: 10px 30px;
+  cursor: pointer;
+  margin-left: 10px;
+  border: none;
+  border-radius: 10px;
+}
+
+.tab a {
+  color: white;
+}
+
+.tab:hover {
+  transition: background-color 0.3s;
+  background-color: rgba(250, 124, 6, 0.24);
+}
+
+.tab__active {
+  padding: 10px 30px;
+  border: 1px solid rgba(255, 154, 2, 0.5);
+  background-color: rgba(255, 178, 78, 0.466);
+  border-radius: 10px;
+  cursor: pointer;
+}
+.tab__active a {
+  color: white;
+}
+body {
+background:radial-gradient(circle, rgba(240, 255, 209, 1) 0%, rgba(255, 208, 143, 1) 70%)
+}
