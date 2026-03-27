@@ -165,6 +165,9 @@ body {
   border-radius: 10px;
   padding: 2px;
   background-color: var(--color-kanAct);
+  padding: 8px;
+  margin: 6px 0;
+  border-radius: 4px;
 }
 
 .task-card:hover{
@@ -176,4 +179,20 @@ body {
 }
 .task-header {
   align-items: center;
+}
+.task-title {
+  margin: 0 0 6px 0;
+  font-size: 16px;
+  word-wrap: break-word;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+
+.task-description {
+  margin: 0 0 8px 0;
+  font-size: 14px;
+  color: #444;
+  white-space: pre-wrap;
+  word-break: break-word;
+  overflow-wrap: anywhere;
 }

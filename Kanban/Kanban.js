@@ -25,18 +25,26 @@ function createTaskElement(taskData) {
   article.dataset.id = taskData.id;
   article.draggable = true;
 
+  // один раз задаём innerHTML (удалён дубль)
   article.innerHTML = `<div class="task-header">
     <h3 class="task-title">${escapeHtml(taskData.title)}</h3>
-    <p class="button-description">${escapeHtml(taskData.description)}</p>
-    <button class="delete-button">Удалить</button>
+    <p class="task-description">${escapeHtml(taskData.description)}</p>
+    <div class="task-controls">
+      <button class="edit-button">Редактировать</button>
+      <button class="delete-button">Удалить</button>
+    </div>
   </div>`;
 
   article.querySelector(".delete-button").addEventListener("click", () => {
     removeTaskById(taskData.id);
   });
 
+  article.querySelector(".edit-button").addEventListener("click", () => {
+    openEditTask(taskData.id);
+  });
+
   article.addEventListener("dragstart", (e) => {
-    e.dataTransfer.setData("text/plain", taskData.id);
+    e.dataTransfer.setData("text/plain", String(taskData.id));
     article.classList.add("dragging");
   });
 
@@ -47,10 +55,35 @@ function createTaskElement(taskData) {
   return article;
 }
 
+function openEditTask(id) {
+  let task = null;
+  let statusOfTask = null;
+  Object.keys(infoData).forEach((status) => {
+    const idx = infoData[status].findIndex((t) => t.id === id);
+    if (idx !== -1) {
+      task = infoData[status][idx];
+      statusOfTask = status;
+    }
+  });
+  if (!task) return;
+
+  const newTitle = prompt("Измените название задачи:", task.title);
+  if (newTitle === null) return;
+  const newDescription = prompt("Измените описание задачи:", task.description);
+  if (newDescription === null) return;
+
+  task.title = newTitle;
+  task.description = newDescription;
+
+  saveTasks();
+  renderBoard();
+}
+
 function renderBoard() {
   columns.forEach((column) => {
     const status = column.dataset.status;
     const tasksContainer = column.querySelector(".tasks") || column;
+    // очистка контейнера корректно
     if (column.querySelector(".tasks")) {
       column.querySelector(".tasks").innerHTML = "";
     } else {
@@ -191,10 +224,9 @@ columns.forEach((column) => {
       const afterElement = getDragAfterElement(dropZone, e.clientY);
       if (afterElement) {
         const afterId = Number(afterElement.dataset.id);
-        const insertIdx = infoData[newStatus].findIndex(
-          (t) => t.id === afterId
-        );
-        infoData[newStatus].splice(insertIdx, 0, taskData);
+        const insertIdx = infoData[newStatus].findIndex((t) => t.id === afterId);
+        const pos = insertIdx === -1 ? infoData[newStatus].length : insertIdx;
+        infoData[newStatus].splice(pos, 0, taskData);
       } else {
         infoData[newStatus].push(taskData);
       }
