@@ -13,7 +13,9 @@ body {
   padding: 30px calc(50% - 976px / 2) 30px;
   width: 100%;
 }
-
+.logo a{
+  color: black;
+}
 .group {
   display: flex;
   flex-direction: row;
@@ -135,6 +137,7 @@ body {
   font-size: 24px;
   margin: 0;
 }
+
 .done button {
   background-color: rgb(224, 235, 253);
   padding: 10px;
