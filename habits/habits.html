@@ -1,38 +1,139 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="stylesheet" href="habits.css">
-    <link rel="stylesheet" href="../styles/style.css">
+    <link rel="stylesheet" href="habits.css" />
+    <link rel="stylesheet" href="../styles/style.css" />
   </head>
   <body>
-  <header>
-    <div class="navigation">
-      <div class="logo">TaskLite</div>
-      <div class="tabs">
-        <div class="tab">
-          <a href="../index.html">To Do</a>
-        </div>
-        <div class="tab">
-          <a href="../Kanban/kanban.html">Kanban</a>
-        </div>
-        <div class="tab__active">
-          <a href="../habits/habits.html">Привычки</a>
+    <header>
+      <div class="navigation">
+        <div class="logo">TaskLite</div>
+        <div class="tabs">
+          <div class="tab">
+            <a href="../index.html">To Do</a>
+          </div>
+          <div class="tab">
+            <a href="../Kanban/kanban.html">Kanban</a>
+          </div>
+          <div class="tab__active">
+            <a href="../habits/habits.html">Привычки</a>
+          </div>
         </div>
       </div>
-    </div>
-  </header>
+    </header>
 
-    <main>
-      <div class="container">
-        <h2>Трекер привычек</h2>
-        <section class="habits">
-        <p>Пока нет привычек. Нажмите "Добавить привычку", чтобы начать</p>
+    <main class="main container">
+      <h2>Трекер привычек</h2>
+      <section class="habits">
         <button id="addBut">Добавить привычку</button>
-        </section>
-      </div>
+        <p id="emptyMsg">Пока нет привычек...</p>
+        <div id="articlesContainer" class="habit"></div>
+      </section>
+
+      <section class="habit-form">
+        <h3>Новая привычка</h3>
+        <input type="text" class="habit-name" placeholder="Название привычки" />
+        <select class="filt-sort">
+          <option value="Каждый день">Каждый день</option>
+          <option value="Будни">Будни</option>
+          <option value="Свой график">Свой график</option>
+        </select>
+        <input
+          type="number"
+          class="habit-target"
+          min="1"
+          placeholder="Цель (дней)"
+        />
+
+        <div class="list">
+          <ul>
+            <li id="heal" class="item">
+              <img
+                src="../svg/heart.svg"
+                alt="Здоровье"
+                class="list__icon"
+              /><button
+                class="list__button"
+                data-category="Здоровье"
+                data-emoji="💖"
+              >
+                Здоровье
+              </button>
+            </li>
+            <li id="book" class="item">
+              <img
+                src="../svg/book.svg"
+                alt="Учёба и развитие"
+                class="list__icon"
+              /><button
+                class="list__button"
+                data-category="Учёба и развитие"
+                data-emoji="📚"
+              >
+                Учёба и развитие
+              </button>
+            </li>
+            <li id="emote" class="item">
+              <img
+                src="../svg/emote.svg"
+                alt="Эмоциональное состояние"
+                class="list__icon"
+              /><button
+                class="list__button"
+                data-category="Эмоциональное состояние"
+                data-emoji="😊"
+              >
+                Эмоциональное состояние
+              </button>
+            </li>
+            <li id="home" class="item">
+              <img
+                src="../svg/home.svg"
+                alt="Дом и быт"
+                class="list__icon"
+              /><button
+                class="list__button"
+                data-category="Дом и быт"
+                data-emoji="🏠"
+              >
+                Дом и быт
+              </button>
+            </li>
+            <li id="work" class="item">
+              <img
+                src="../svg/work.svg"
+                alt="Работа и финансы"
+                class="list__icon"
+              /><button
+                class="list__button"
+                data-category="Работа и финансы"
+                data-emoji="💼"
+              >
+                Работа и финансы
+              </button>
+            </li>
+            <li id="hab" class="item">
+              <img
+                src="../svg/habit.svg"
+                alt="Соц.привычки"
+                class="list__icon"
+              /><button
+                class="list__button"
+                data-category="Соц.привычки"
+                data-emoji="🤝"
+              >
+                Соц.привычки
+              </button>
+            </li>
+          </ul>
+
+          <button class="save" id="saveBtn">Сохранить привычку</button>
+          <button class="cancel" id="cancelBtn">Отмена</button>
+        </div>
+      </section>
     </main>
 
     <footer></footer>
